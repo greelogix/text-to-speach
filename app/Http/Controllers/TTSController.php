@@ -27,10 +27,17 @@ class TTSController extends Controller
 
         $response = Http::get($url);
 
-        if ($response->successful()) {
+       if ($response->successful()) {
+            $directory = 'audio/';
+            $existingFiles = Storage::disk('public')->files($directory);
+    
+            if (!empty($existingFiles)) {
+                Storage::disk('public')->delete($existingFiles);
+            }
+    
             $fileName = 'tts_' . time() . '.mp3';
-            $path = 'audio/' . $fileName; 
-
+            $path = $directory . $fileName; 
+    
             Storage::disk('public')->put($path, $response->body());
     
             return response()->json([
