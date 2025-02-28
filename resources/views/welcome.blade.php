@@ -25,7 +25,7 @@
                 </select>
             </div>
             <button class="btn btn-primary w-100" id="convertBtn">Convert to Speech</button>
-            <div class="mt-3" id="audio-container" style="display: none;">
+            <div class="mt-3" id="audio-container" style="display: none">
                 <audio id="audio" controls class="w-100"></audio>
             </div>
         </div>
@@ -52,7 +52,7 @@
                         if (data.status === "success") {
                             $("#audio").attr("src", data.audio_url);
                             $("#audio-container").show();
-                            $("#audio")[0].play();
+                            // $("#audio")[0].play();
                         } else {
                             alert("Failed to generate speech");
                         }

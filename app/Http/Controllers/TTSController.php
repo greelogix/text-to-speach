@@ -1,50 +1,5 @@
 <?php
 
-// namespace App\Http\Controllers;
-
-// use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Http;
-// use Illuminate\Support\Facades\Storage;
-
-// class TTSController extends Controller
-// {
-//     public function generateSpeech(Request $request)
-//     {
-//         $request->validate([
-//             'text' => 'required|string|max:300',
-//             'voice' => 'nullable|string',
-//         ]);
-
-//         $text = $request->input('text');
-//         $voice = $request->input('voice', 'en_us_001'); 
-
-//         $response = Http::post('https://tiktok-tts.weilbyte.dev/api/generate', [
-//             'text' => $text,
-//             'voice' => $voice
-//         ]);
-
-//         dd($response->body()); 
-
-//         if ($response->successful() && isset($response['data'])) {
-//             $audioData = file_get_contents($response['data']);
-//             $fileName = 'tts_' . time() . '.mp3';
-//             Storage::put('public/tts/' . $fileName, $audioData);
-
-//             return response()->json([
-//                 'status' => 'success',
-//                 'message' => 'TTS generated successfully!',
-//                 'audio_url' => asset('storage/tts/' . $fileName)
-//             ]);
-//         }
-
-//         return response()->json([
-//             'status' => 'error',
-//             'message' => 'Failed to generate speech'
-//         ], 500);
-//     }
-// }
-
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -74,12 +29,14 @@ class TTSController extends Controller
 
         if ($response->successful()) {
             $fileName = 'tts_' . time() . '.mp3';
-            Storage::put('public/tts/' . $fileName, $response->body());
+            $path = 'audio/' . $fileName; 
 
+            Storage::disk('public')->put($path, $response->body());
+    
             return response()->json([
                 'status' => 'success',
                 'message' => 'TTS generated successfully!',
-                'audio_url' => asset('storage/tts/' . $fileName)
+                'audio_url' => asset('storage/' . $path),
             ]);
         }
 
