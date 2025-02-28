@@ -27,7 +27,23 @@ class TTSController extends Controller
 
         $response = Http::get($url);
 
+<<<<<<< Updated upstream
        if ($response->successful()) {
+=======
+        // if ($response->successful()) {
+        //     $fileName = 'tts_' . time() . '.mp3';
+        //     $path = 'audio/' . $fileName; 
+
+        //     Storage::disk('public')->put($path, $response->body());
+    
+        //     return response()->json([
+        //         'status' => 'success',
+        //         'message' => 'TTS generated successfully!',
+        //         'audio_url' => asset('storage/' . $path),
+        //     ]);
+        // }
+        if ($response->successful()) {
+>>>>>>> Stashed changes
             $directory = 'audio/';
             $existingFiles = Storage::disk('public')->files($directory);
     
