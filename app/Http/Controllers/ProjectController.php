@@ -10,10 +10,14 @@ class ProjectController extends Controller
 {
     public function index($project_id)
     {
-        $voices = Voice::where('project_id', $project_id)->orderBy('id', 'desc')->paginate(12);
-        $project = Project::find($project_id);
-        return view('voices_list', compact('voices','project'));
+        $project = Project::where('id', $project_id)
+                          ->where('user_id', Auth::id())
+                          ->firstOrFail();
+        $voices = $project->voices()->orderBy('id', 'desc')->paginate(12);
+    
+        return view('voices_list', compact('voices', 'project'));
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -33,10 +37,14 @@ class ProjectController extends Controller
         ]);
     }
 
-    public function projects_list(){
-        $projects = Project::withCount('voices')->orderBy('id', 'desc')->paginate(8);
-        $recent_voices = Voice::orderBy('id', 'desc')->take(8)->get();
-        
+    public function projects_list()
+    {
+        $userId = Auth::id();
+        $projects = Project::where('user_id', $userId)->withCount('voices')->orderBy('id', 'desc')->paginate(8);
+
+        $recent_voices = Voice::whereHas('project', function ($query) use ($userId) {
+                                $query->where('user_id', $userId);
+                            })->orderBy('id', 'desc')->take(8)->get();
         return view('projects_list', compact('projects', 'recent_voices'));
     }
     

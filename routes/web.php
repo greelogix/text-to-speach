@@ -9,7 +9,7 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register.form');
 
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('auth.login');
 })->name('login.form');
 
@@ -25,7 +25,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
     Route::delete('/delete_project/{id}', [ProjectController::class, 'delete_project'])->name('delete_project');
     Route::delete('/delete_voice/{id}', [ProjectController::class, 'delete_voice'])->name('delete_voice');
-    Route::get('/voices/{project_id}', [ProjectController::class, 'index'])->name('voices.index');
+    Route::get('/project/{project_id}', [ProjectController::class, 'index'])->name('voices.index');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 });
