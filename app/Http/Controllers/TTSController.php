@@ -69,6 +69,7 @@ class TTSController extends Controller
                     ]);
                     $updateMessage = 'update_voice';
                 } 
+
              if ($saveAudio) {
                 $project = Project::create([
                     'user_id' => Auth::id(),
@@ -83,6 +84,7 @@ class TTSController extends Controller
                     ]);
                 }
             }
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'TTS processed successfully!',

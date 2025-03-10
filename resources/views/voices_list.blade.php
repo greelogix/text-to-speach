@@ -15,7 +15,7 @@
         <div class="d-flex justify-content-between align-items-baseline">
             <p class=""><a href="{{route('projects.list')}}" class=" text-dark text-decoration-none">Project</a> > My Projects (Voices)</p>
             <div class="mt-4 action-buttons">
-                <button type="button" data-bs-toggle="modal" data-bs-target="#AddVoiceModal" class="btn text-white add-voice-btn bg-success border-0"  data-project-id="{{$project->id}}" style="height: 35px;font-size: small;">+ Audio file</button>
+                <button type="button" data-bs-toggle="modal" data-bs-target="#AddVoiceModal" class="btn text-white add-voice-btn bg-success border-0"  data-project-id="{{ $project->id }}" style="height: 35px;font-size: small;">+ Audio file</button>
             </div>
         </div>
         <div class="row">
@@ -119,6 +119,7 @@
         $(document).ready(function() {
             $('.add-voice-btn').on('click', function () {
                 var projectId = $(this).data('project-id');
+                console.log(projectId)
                 $('.project_id').val(projectId);
             });
 
@@ -145,7 +146,9 @@
             let text = $("#text").val().trim();
             let project_name = $("#title").val().trim();    
             let lang = $("#lang").val();
-            let projectid = fetchProjectId ? $('.project_id').val() : null;
+            let projectid = fetchProjectId ? $('#project-id').val() : null; 
+
+            console.log(projectid);
 
             if (!text) {
                 toastr.error("Please enter some text");
@@ -204,9 +207,10 @@
         });
 
         $("#createAudio").click(function () {
-            handleAudioAction(true, true); 
+            handleAudioAction(false, true); 
         });
     });
+
 </script>
 </body>
 @endsection
