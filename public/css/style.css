@@ -1,0 +1,154 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body {
+    height: 100vh;
+    width: 100vw;
+}
+.btn-color,.btn-purple{
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+}
+
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+textarea, select {
+    border-radius: 10px;
+}
+#convertBtn {
+    background: #ff7eb3;
+    border: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+#convertBtn:hover {
+    background: #ff4f81;
+}
+#audio-container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.bg-purple {
+    background-color: #7f56d9;
+    color: white;
+}
+
+.custom-modal {
+    border-radius: 12px;
+  }
+  .custom-input {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-size: small;
+  }
+  .custom-cancel {
+    border: 2px solid #906cf3;
+    color: #906cf3;
+    background: transparent;
+    border-radius: 8px;
+    padding: 6px 16px;
+  }
+  .custom-create {
+    background-color: #906cf3;
+    color: white;
+    border-radius: 8px;
+    padding: 8px 16px;
+    border: none;
+  }
+  .custom-cancel:hover {
+    background: #906cf3;
+    color: white;
+  }
+  .custom-create:hover {
+    background: #7a5bd6;
+    color: white;
+  }
+  .folder-card {
+    border-radius: 12px;
+    padding: 20px;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 300px;
+}
+.folder-icon {
+    width: 50px;
+    height: 50px;
+    background: #cdb4f9;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.folder-icon i {
+    font-size: 24px;
+    color: #6d28d9;
+}
+.folder-info {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+.folder-info h6 {
+    margin: 0;
+    font-weight: bold;
+}
+.folder-info p {
+    margin: 0;
+    color: gray;
+}
+.dropdown-toggle::after {
+    display: none;
+}
+
+.card-folder {
+  background: #e9e6ff;
+  border: none;
+  border-radius: 10px;
+}
+.card-file {
+  border-radius: 10px;
+}
+.icon-folder {
+  font-size: 3rem;
+  color: purple;
+}
+.file-icon {
+  font-size: 2rem;
+}
+
+.project-card {
+  border: 8px solid #EAE1FFC4 !important;
+  border-radius: 15px;
+  padding: 15px;
+  background: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+.project-card img {
+  width: 60px;
+  height: auto;
+}
+.project-card h6 {
+  margin-top: 10px;
+  font-weight: bold;
+}
+.project-card p {
+  margin-bottom: 5px;
+  color: gray;
+  font-size: 14px;
+}
+.action-buttons .btn {
+  border-radius: 8px;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+
