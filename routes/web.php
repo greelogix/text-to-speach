@@ -9,7 +9,7 @@ Route::get('/register', function () {
     return view('auth.register');
 })->name('register.form');
 
-Route::get('/login', function () {
+Route::get('/', function () {
     return view('auth.login');
 })->name('login.form');
 
