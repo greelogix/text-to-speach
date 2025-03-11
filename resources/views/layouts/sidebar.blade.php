@@ -21,7 +21,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content custom-modal">
             <div class="modal-header border-0">
-                <h5 class="modal-title fw-bold mx-auto">Create Project</h5>
+                <h5 class="modal-title fw-bold mx-auto project_ce">Create Project</h5>
             </div>
             <form action="{{route('projects.store')}}" method="POST">
                 <div class="modal-body">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="modal-footer border-0 d-flex justify-content-end">
                     <button type="button" class="btn custom-cancel" data-bs-dismiss="modal" style=" border: 1px solid red;color: #906cf3;background: transparent;color: black;border-radius: 8px;padding: 6px 16px;">Cancel</button>
-                    <button type="button" class="btn custom-create" id="createProject" style=" background-color: green;color: white;border-radius: 8px;padding: 8px 16px;border: none;">Create Project</button>
+                    <button type="button" class="btn custom-create project-btn" id="createProject" style=" background-color: green;color: white;border-radius: 8px;padding: 8px 16px;border: none;">Create Project</button>
                 </div>
         </form>
         </div>
@@ -73,6 +73,8 @@
         $('.create-project').on('click',function(){
                  $('.project_id').val('');
                 $('.project_name').val('');
+                $('.project_ce').text('Create Project');
+                $('.project-btn').text('Create Project');
         });
     });
 </script>

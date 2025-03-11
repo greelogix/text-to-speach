@@ -149,6 +149,9 @@
                 var projectName = $(this).data('project-name');
                 $('.project_id').val(projectId);
                 $('.project_name').val(projectName);
+                $('.project_ce').text('Update Project');
+                $('.project-btn').text('Update Project');
+                
             });
 
            $(".card-voice").on("click", function(e) {
