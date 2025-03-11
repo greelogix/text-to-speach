@@ -24,15 +24,13 @@
             </div>
             <div class="row pt-3">
                 <div class="col text-end">
-                    <button class="btn btn-color text-white" id="createAudio" style="background: green;">Create Audio</button>
+                    <button class="btn btn-color text-white" id="createAudio" style="background: green;">
+                        Create Audio
+                    </button>
                 </div>
             </div>
         </div>
     </div>
-    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.responsivevoice.org/responsivevoice.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-    <script src="{{ asset('js/languages.js') }}"></script> --}}
     <script>
     $(document).ready(function () {
         $("#lang").select2({

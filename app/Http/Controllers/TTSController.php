@@ -16,6 +16,10 @@ class TTSController extends Controller
     {
         return view('text_to_speech');
     }
+    public function free_tts()
+    {
+        return view('free_tts');
+    }
     public function generateSpeech(Request $request)
     {
         try {

@@ -16,7 +16,7 @@
         <div class="row mt-5">
         @if ($projects->count() > 0)
             @foreach ($projects as $project)
-            <div class="col-md-3" style="cursor: pointer;">
+            <div class="col-lg-3 col-md-6 col-sm-12" style="cursor: pointer;">
                 <a href="{{ route('voices.index', ['project_id' => $project->id]) }}" class="text-decoration-none text-dark">
                 <div class="card card-folder p-3 mb-4 shadow-sm border-0">
                     <div class="d-flex align-items-center justify-content-between">
@@ -80,7 +80,7 @@
         <div class="row mt-3">
             @if ($recent_voices->count() > 0)
             @foreach ($recent_voices as $voice)
-            <div class="col-md-3 pb-3">
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-3">
                 <div class="card card-file p-3 shadow-sm border-0" style="cursor: pointer;">
                     <div class="file-icon d-flex gap-2 justify-content-between">
                         <div class="d-flex gap-2 card-voice">
@@ -137,7 +137,6 @@
                 </audio>
             </div>
         </div>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> --}}
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
