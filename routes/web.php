@@ -11,10 +11,10 @@ Route::get('/register', function () {
 
 Route::get('/', function () {
     return view('auth.login');
-})->name('login.form');
+})->name('login');
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/', [AuthController::class, 'login'])->name('login');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/generate-speech-page', [TTSController::class, 'generateSpeechPage'])->name('generate_speech_page');
