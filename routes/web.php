@@ -13,10 +13,14 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
+Route::get('/', function () {
+    return view('index');
+})->name('index.page');
+
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::get('/', [TTSController::class, 'free_tts'])->name('free.tts');
+Route::get('/free_tts', [TTSController::class, 'free_tts'])->name('free.tts');
 
 Route::middleware(['check.tts.limit'])->group(function () {
     Route::post('/generate-speech', [TTSController::class, 'generateSpeech'])->name('generate-text-to-speech');
