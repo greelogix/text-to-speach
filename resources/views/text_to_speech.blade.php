@@ -5,19 +5,30 @@
         <h2 class="text-center fw-bold mb-4">Text to Speech Converter</h2>
         <div class="card p-4">
             <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" id="title" class="form-control shadow-none" placeholder="Enter file name">
+                <div class="row">
+                    <div class="col-6">
+                        <label for="title" class="form-label font-family">Title</label>
+                        <input type="text" id="title" class="form-control shadow-none border-style" placeholder="Enter file name">
+                    </div>
+                    <div class="col-6">
+                        <label for="languageDropdown" class="form-label font-family">Language</label>
+                        <select id="languageDropdown" class="form-control shadow-none">
+                            <option value="h-20" style="30px">Select Language</option>
+                        </select>
+                    </div>
+                </div>
             </div>
             <div class="mb-3">
-                <label for="text" class="form-label">Enter Your Text</label>
+                <label for="text" class="form-label font-family">Enter Your Text</label>
                 <textarea id="text" class="form-control shadow-none" rows="15" placeholder="Enter text here..."></textarea>
             </div>
-            <div class="mb-3">
+            {{-- <div class="mb-3">
                 <select id="languageDropdown" class="form-select">
                     <option value="">Select Language</option>
                 </select>
-            </div>
-                <div class="col-12 d-flex pb-4 pt-4 align-items-center gap-5">
+            </div> --}}
+            <div class="row">
+                <div class="d-flex pb-4 pt-4 align-items-center gap-5">
                     <div class="btn-group dropup">
                         <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="{{asset('image/images.png')}}" alt="" width="40">
@@ -31,7 +42,9 @@
                     </div>
 
                   <div class="btn-group dropup d-flex align-items-center gap-2">
-                    <span><i class="fa-solid fa-gauge" style="font-size: xx-large;"></i></span>
+                    <span>
+                       <img src="{{asset('image/skating.png')}}" alt=""  width="25">
+                    </span>
                     <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Speech Speed
                     </div>
@@ -43,17 +56,18 @@
                                 <input type="number" id="rate" name="rate" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
                                 <button class="btn-circle increase">+</button>
                             </div>
-                            <div class="slider-container">
+                            {{-- <div class="slider-container">
                                 <div class="custom-slider">
                                     <div class="slider-thumb"></div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
-                
-                <div class="btn-group dropup">
-                    <i class="fa-solid fa-wave-sine"></i>
+                <div class="btn-group dropup gap-2">
+                    <span>
+                        <img src="{{asset('image/microphone-alt.png')}}" alt=""  width="25">
+                     </span>
                     <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Pitch
                     </div>
@@ -65,17 +79,19 @@
                                 <input type="number" id="pitch" name="pitch" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
                                 <button class="btn-circle increase">+</button>
                             </div>
-                            <div class="slider-container">
+                            {{-- <div class="slider-container">
                                 <div class="custom-slider">
                                     <div class="slider-thumb"></div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
 
-                <div class="btn-group dropup">
-                    <i class="fa-solid fa-wave-sine"></i>
+                <div class="btn-group dropup gap-2">
+                    <span>
+                        <img src="{{asset('image/volume.png')}}" alt=""  width="25">
+                     </span>
                     <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         Volume
                     </div>
@@ -87,25 +103,20 @@
                                 <input type="number" id="volume" name="volume" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
                                 <button class="btn-circle increase">+</button>
                             </div>
-                            <div class="slider-container">
+                            {{-- <div class="slider-container">
                                 <div class="custom-slider">
                                     <div class="slider-thumb"></div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
+                <button class="btn btn-primary w-50" id="convertBtn">Convert to Speech</button>
+                <button class="btn btn-color text-white w-50" id="createAudio" style="background: green;">Create Audio </button>
             </div>
-            <button class="btn btn-primary w-100" id="convertBtn">Convert to Speech</button>
+            </div>
             <div class="mt-3" id="audio-container" style="display: none;">
                 <audio id="audio" controls class="w-100"></audio>
-            </div>
-            <div class="row pt-3">
-                <div class="col text-end">
-                    <button class="btn btn-color text-white" id="createAudio" style="background: green;">
-                        Create Audio
-                    </button>
-                </div>
             </div>
         </div>
     </div>
@@ -188,7 +199,7 @@
 
         $.get('/languages', function (data) {
             $.each(data, function (key, value) {
-                $('#languageDropdown').append('<option value="' + key + '">' + value + '</option>');
+                $('#languageDropdown').append('<option class="h-50" value="' + key + '">' + value + '</option>');
             });
             $('#languageDropdown').val('en-US').trigger('change');
         });
@@ -205,10 +216,14 @@
                             let friendlyName = extractVoiceName(voice.friendly_name);
                             let voiceCard = `
                                 <div class="col-12 mb-2">
-                                    <div class="voice-card p-3 text-center" data-voice="${voice.short_name}" style="border-radius: 10px; cursor: pointer;">
-                                        <img src="{{asset('image/images.png')}}" alt="${friendlyName}" width="40">
-                                        <p class="free">Free</p>
-                                        <h6 class="name">${friendlyName}</h6>
+                                    <div class="voice-card p-3 text-center d-flex justify-content-around align-items-center" data-voice="${voice.short_name}" style="border-radius: 10px; cursor: pointer;">
+                                        <div class="d-flex">
+                                          <img src="{{asset('image/images.png')}}" alt="${friendlyName}" width="40">
+                                          <span class="free">Free</span>
+                                        </div>
+                                         <div>
+                                             <h6 class="name">${friendlyName}</h6>
+                                         </div>
                                     </div>
                                 </div>`;
                             $('#voiceList').append(voiceCard);
@@ -289,9 +304,12 @@
                         toastr.error("Please select a voice");
                         return false; 
                     }
-
-            $("#convertBtn").text("Processing...").prop("disabled", true);
-
+                    if(saveAudio){
+                      $("#createAudio").text("Processing...").prop("disabled", true);
+                    }else{
+                        $("#convertBtn").text("Processing...").prop("disabled", true);
+                    }
+        
             $.ajax({
                 url: "{{ route('generate-text-to-speech') }}",
                 type: "POST",

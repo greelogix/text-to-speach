@@ -154,6 +154,7 @@ textarea, select {
 
 .custom-modal {
   width: 270px;
+  height: 125px;
   background: #fff;
   border-radius: 12px;
   padding: 15px;
@@ -163,9 +164,10 @@ textarea, select {
 .btn-circle {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: 20%;
   border: none;
-  background: #f0f0f0;
+  color: white;
+  background: #9783f1;
   font-size: 20px;
   font-weight: bold;
 }
@@ -216,5 +218,26 @@ textarea, select {
   color: orange;
   font-size: 12px;
   font-weight: bold;
+}
+.font-family{
+  font-family: monospace;
+}
+
+#languageDropdown {
+  height: 38px !important;
+  padding: 6px 12px;
+  border-radius: 5px;
+}
+.select2-container .select2-selection--single {
+  height: 38px !important;
+  display: flex;
+  align-items: center;
+  border: 1px solid #c6c6c6;
+}
+.border-style{
+  border: 1px solid #c6c6c6;
+}
+.select2-selection__clear{
+  display: none !important;
 }
 
