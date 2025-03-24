@@ -152,3 +152,69 @@ textarea, select {
 }
 
 
+.custom-modal {
+  width: 270px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #f0f0f0;
+  font-size: 20px;
+  font-weight: bold;
+}
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 15px;
+}
+.custom-slider {
+  width: 20px;
+  height: 120px;
+  background: #f0f0f0;
+  border-radius: 20px;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: 5px;
+}
+.slider-thumb {
+  width: 20px;
+  height: 50px;
+  background: #6a49ff;
+  border-radius: 10px;
+  position: absolute;
+  bottom: 2px;
+  left: 0px;
+}
+
+  .voice-card {
+    border: 1px solid lightgray;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px;
+    transition: 0.3s;
+  }
+  .voice-card:hover, .voice-card.active {
+    border-color: #6f42c1;
+    box-shadow: 0 0 10px rgba(111, 66, 193, 0.3);
+  }
+.voice-card img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+}
+.voice-card .free {
+  color: orange;
+  font-size: 12px;
+  font-weight: bold;
+}
+

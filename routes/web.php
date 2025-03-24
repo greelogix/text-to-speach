@@ -25,6 +25,8 @@ Route::get('/free_tts', [TTSController::class, 'free_tts'])->name('free.tts');
 Route::middleware(['check.tts.limit'])->group(function () {
     Route::post('/generate-speech', [TTSController::class, 'generateSpeech'])->name('generate-text-to-speech');
 });
+Route::get('/languages', [TTSController::class, 'getLanguages']);
+Route::get('/voices/{locale}', [TTSController::class, 'getVoicesByLanguage']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/generate-speech-page', [TTSController::class, 'generateSpeechPage'])->name('generate_speech_page');

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Project;
 use App\Models\Voice;
 use Illuminate\Support\Facades\Auth;
+use Afaya\EdgeTTS\Service\EdgeTTS;
+use App\Models\TextToSpeechVoice;
 
 class TTSController extends Controller
 {
@@ -20,87 +22,197 @@ class TTSController extends Controller
     {
         return view('free_tts');
     }
+
+    
+    // public function generateSpeech(Request $request)
+    // {
+    //     try {
+            
+    //         $request->validate([
+    //             'text' => 'required|string',
+    //             'lang' => 'nullable|string',
+    //             'project_name' => 'required|string|max:255',
+    //             'projectid' => 'nullable|integer',
+    //         ]);
+
+    //         $text = trim($request->input('text'));
+    //         $projectid = $request->input('projectid');
+    //         $project_name = trim($request->input('project_name'));
+    //         $lang = $request->input('lang', 'en');
+    //         $saveAudio = $request->input('saveAudio', false);
+
+    //         if (empty($text) || empty($project_name)) {
+    //             return response()->json([
+    //                 'status' => 'error',
+    //                 'message' => 'Text & Title cannot be empty',
+    //             ], 400);
+    //         }
+
+    //         $chunks = str_split($text, 200);
+    //         $audioData = '';
+
+    //         foreach ($chunks as $chunk) {
+    //             $encodedText = urlencode($chunk);
+    //             $url = "https://translate.google.com/translate_tts?ie=UTF-8&client=gtx&q={$encodedText}&tl={$lang}";
+
+    //             $response = Http::get($url);
+
+    //             if ($response->successful() && $response->header('Content-Type') === 'audio/mpeg') {
+    //                 $audioData .= $response->body();
+    //             } else {
+    //                 return response()->json([
+    //                     'status' => 'error',
+    //                     'message' => 'Failed to generate speech.',
+    //                 ], 500);
+    //             }
+    //         }
+
+    //         $base64Audio = base64_encode($audioData);
+    //         $updateMessage = 'no_update';
+
+    //             if ($projectid) {
+    //                 Voice::create([
+    //                     'project_id' => $projectid,
+    //                     'title' => $project_name,
+    //                     'text_to_audio' => $base64Audio,
+    //                 ]);
+    //                 $updateMessage = 'update_voice';
+    //             } 
+
+    //          if ($saveAudio) {
+    //             $project = Project::create([
+    //                 'user_id' => Auth::id(),
+    //                 'project_name' => $project_name,
+    //             ]);
+
+    //             if ($project) {
+    //                 Voice::create([
+    //                     'project_id' => $project->id,
+    //                     'title' => $project_name,
+    //                     'text_to_audio' => $base64Audio,
+    //                 ]);
+    //             }
+    //         }
+
+    //         return response()->json([
+    //             'status' => 'success',
+    //             'message' => 'TTS processed successfully!',
+    //             'update_voice' => $updateMessage,
+    //             'audio_base64' => $base64Audio,
+    //         ]);
+    //     } catch (\Exception $e) {
+    //         Log::error("Error in generateSpeech method: " . $e->getMessage() . " - Line: " . $e->getLine());
+    //         return response()->json([
+    //             'status' => 'error',
+    //             'message' => $e->getMessage(),
+    //         ], 500);
+    //     }
+    // }
+
+
     public function generateSpeech(Request $request)
     {
         try {
+
             $request->validate([
                 'text' => 'required|string',
-                'lang' => 'nullable|string',
+                'rate' => 'nullable|string|min:-100|max:100',
+                'volume' => 'nullable|string|min:-100|max:100',
+                'pitch' => 'nullable|string',
                 'project_name' => 'required|string|max:255',
-                'projectid' => 'nullable|integer',
+                'projectid' => 'nullable|integer|exists:projects,id',
+                'voice' => 'nullable|string',
+                'saveAudio' => 'nullable|boolean',
             ]);
-
+    
             $text = trim($request->input('text'));
             $projectid = $request->input('projectid');
             $project_name = trim($request->input('project_name'));
-            $lang = $request->input('lang', 'en');
-            $saveAudio = $request->input('saveAudio', false);
-
+            $voice = $request->input('voice');
+            $saveAudio = $request->boolean('saveAudio');
+    
             if (empty($text) || empty($project_name)) {
                 return response()->json([
                     'status' => 'error',
-                    'message' => 'Text & Title cannot be empty',
+                    'message' => 'Text & Project Name cannot be empty',
                 ], 400);
             }
+    
+            $tts = new EdgeTTS();
 
-            $chunks = str_split($text, 200);
-            $audioData = '';
-
-            foreach ($chunks as $chunk) {
-                $encodedText = urlencode($chunk);
-                $url = "https://translate.google.com/translate_tts?ie=UTF-8&client=gtx&q={$encodedText}&tl={$lang}";
-
-                $response = Http::get($url);
-
-                if ($response->successful() && $response->header('Content-Type') === 'audio/mpeg') {
-                    $audioData .= $response->body();
-                } else {
-                    return response()->json([
-                        'status' => 'error',
-                        'message' => 'Failed to generate speech.',
-                    ], 500);
-                }
+            if (!method_exists($tts, 'synthesize')) {
+                throw new \Exception("EdgeTTS method 'synthesize' does not exist.");
             }
-
-            $base64Audio = base64_encode($audioData);
+    
+            $tts->synthesize($text, $voice, [
+                'rate' => $request->rate,
+                'volume' => $request->volume,
+                'pitch' => $request->pitch,
+            ]);
+    
+            $audioData = $tts->toBase64();
+            
+            if (empty($audioData)) {
+                throw new \Exception("Failed to generate speech audio.");
+            }
+    
             $updateMessage = 'no_update';
-
-                if ($projectid) {
-                    Voice::create([
-                        'project_id' => $projectid,
-                        'title' => $project_name,
-                        'text_to_audio' => $base64Audio,
-                    ]);
-                    $updateMessage = 'update_voice';
-                } 
-
-             if ($saveAudio) {
+    
+            // Save voice data
+            if ($projectid) {
+                Voice::create([
+                    'project_id' => $projectid,
+                    'title' => $project_name,
+                    'text_to_audio' => $audioData,
+                ]);
+                $updateMessage = 'update_voice';
+            }
+    
+            if ($saveAudio) {
                 $project = Project::create([
                     'user_id' => Auth::id(),
                     'project_name' => $project_name,
                 ]);
-
-                if ($project) {
-                    Voice::create([
-                        'project_id' => $project->id,
-                        'title' => $project_name,
-                        'text_to_audio' => $base64Audio,
-                    ]);
-                }
+    
+                Voice::create([
+                    'project_id' => $project->id,
+                    'title' => $project_name,
+                    'text_to_audio' => $audioData,
+                ]);
             }
-
+    
             return response()->json([
                 'status' => 'success',
                 'message' => 'TTS processed successfully!',
                 'update_voice' => $updateMessage,
-                'audio_base64' => $base64Audio,
+                'audio_base64' => $audioData, 
             ]);
+    
         } catch (\Exception $e) {
             Log::error("Error in generateSpeech method: " . $e->getMessage() . " - Line: " . $e->getLine());
+    
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
+                'line' => $e->getLine(), 
             ], 500);
         }
     }
+    
+      public function getLanguages()
+        {
+            return response()->json(
+                TextToSpeechVoice::distinct()
+                    ->pluck('locale')
+                    ->mapWithKeys(fn($locale) => [$locale => locale_get_display_name($locale, 'en')])
+            );
+        }
+
+        public function getVoicesByLanguage(string $locale)
+        {
+            return response()->json(
+                TextToSpeechVoice::where('locale', $locale)->get()
+            );
+        }
+    
 }

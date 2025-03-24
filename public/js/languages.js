@@ -18,8 +18,7 @@ function fetchLanguages() {
         "ur-PK": "Urdu", "uz-UZ": "Uzbek", "vi-VN": "Vietnamese", "xh-ZA": "Xhosa", "zh-CN": "Chinese (Simplified)",
         "zh-HK": "Chinese (Hong Kong)", "zh-TW": "Chinese (Taiwan)",
     };
-
-
+  
     $("#lang").empty().append('<option value="en-US" selected>English (US)</option>');
     
     Object.entries(ttsLanguages).forEach(([code, name]) => {
