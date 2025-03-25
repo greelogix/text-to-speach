@@ -54,21 +54,52 @@
   left: 0px;
 }
 
-  .voice-card {
-    border: 1px solid lightgray;
+.voice-card {
+    border: 2px solid transparent;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
     padding: 15px;
-    text-align: center;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: 0.3s;
-  }
-  .voice-card:hover, .voice-card.active {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.voice-card:hover, .voice-card.active {
     border-color: #6f42c1;
-    box-shadow: 0 0 10px rgba(111, 66, 193, 0.3);
-  }
-.voice-card .free {
-  color: orange;
-  font-size: 12px;
-  font-weight: bold;
+    box-shadow: 0 6px 12px rgba(111, 66, 193, 0.3);
+    background: linear-gradient(135deg, #6f42c1, #9b59b6);
+    color: white;
+}
+
+.voice-card:hover .free {
+    background: #ff9800;
+    color: white;
+}
+
+.voice-img img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    border: 2px solid #6f42c1;
+    padding: 5px;
+}
+
+.voice-info h6 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.voice-info .free {
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    background: orange;
+    padding: 3px 8px;
+    border-radius: 8px;
 }
 
 .font-family{
@@ -277,7 +308,7 @@
                                     </div>
                                 </div>
                                 <button class="btn btn-primary w-50" id="convertBtn">Convert to Speech</button>
-                                <button class="btn btn-color text-white w-50" id="createAudio" style="background: green;">Create Audio </button>
+                                <button class="btn btn-color text-white w-50" id="createAudio" style="background: #6f42c1;">Create Audio </button>
                             </div>
                             </div>
                             <div class="mt-3" id="audio-container" style="display: none;">
@@ -312,84 +343,6 @@
                 }
             });
 
-        // });
-
-    // $(document).ready(function () {
-    //         $("#lang").select2({
-    //             placeholder: "Select a language",
-    //             allowClear: true,
-    //         });
-    //         fetchLanguages();
-    //     function handleAudioAction(saveAudio = false, fetchProjectId = false) {
-    //         let text = $("#text").val().trim();
-    //         let project_name = $("#title").val().trim();    
-    //         let lang = $("#lang").val();
-    //         let projectid = fetchProjectId ? $('#project-id').val() : null; 
-
-    //         console.log(projectid);
-
-    //         if (!text) {
-    //             toastr.error("Please enter some text");
-    //             return false; 
-    //         }
-
-    //         if (!project_name) {
-    //             toastr.error("Please enter a title");
-    //             return false;
-    //         }
-
-    //         if (!lang) {
-    //             toastr.error("Please select a language");
-    //             return false; 
-    //         }
-    //             $("#convertBtn").text("Processing...").prop("disabled", true);
-    //         $.ajax({
-    //             url: "{{ route('generate-text-to-speech') }}",
-    //             type: "POST",
-    //             headers: {
-    //                 "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
-    //             },
-    //             contentType: "application/json",
-    //             data: JSON.stringify({ text: text, lang: lang, project_name: project_name, projectid: projectid, saveAudio: saveAudio  }),
-    //             success: function (data) {
-    //                 if (data.status === "success") {
-    //                     console.log(data);
-    //                     toastr.success("Audio processed successfully!");
-    //                     let audioSrc = "data:audio/mpeg;base64," + data.audio_base64;
-    //                     $("#audio").attr("src", audioSrc); 
-    //                     $("#audio-container").show(); 
-    //                     $('#AddVoiceModal').modal('show');
-    //                     if(data.update_voice === "update_voice"){
-    //                     $('#AddVoiceModal').modal('hide');
-    //                      setTimeout(function() { 
-    //                         location.reload();
-    //                     }, 1000); 
-    //                     }
-    //                 } else {
-    //                     toastr.error("Failed to process audio");
-    //                 }
-    //             },
-    //             error: function (jqXHR, textStatus, errorThrown) {
-    //                 console.error("AJAX Error:", textStatus, errorThrown, jqXHR.responseText);
-    //                 toastr.error("Something went wrong! " + jqXHR.responseText);
-    //             },
-
-    //             complete: function () {
-    //                 $("#convertBtn").text("Convert to Speech").prop("disabled", false);
-    //             }
-    //         });
-    //     }
-
-    //     $("#convertBtn").click(function () {
-    //         handleAudioAction(false, false); 
-    //     });
-
-    //     $("#createAudio").click(function () {
-    //         handleAudioAction(false, true); 
-    //     });
-    // });
-
-    // $(document).ready(function () {
         $("#languageDropdown").select2({
             placeholder: "Select a language",
             allowClear: true
@@ -413,15 +366,15 @@
                         $.each(voices, function (index, voice) {
                             let friendlyName = extractVoiceName(voice.friendly_name);
                             let voiceCard = `
-                                <div class="col-12 mb-2">
-                                    <div class="voice-card p-3 text-center d-flex justify-content-around align-items-center" data-voice="${voice.short_name}" style="border-radius: 10px; cursor: pointer;">
-                                        <div class="d-flex">
-                                          <img src="{{asset('image/images.png')}}" alt="${friendlyName}" width="40">
-                                          <span class="free">Free</span>
+                               <div class="col-12 mb-3">
+                                    <div class="voice-card p-3 d-flex align-items-center" data-voice="${voice.short_name}">
+                                        <div class="voice-img">
+                                            <img src="{{asset('image/images.png')}}" alt="${friendlyName}">
                                         </div>
-                                         <div>
-                                             <h6 class="name">${friendlyName}</h6>
-                                         </div>
+                                        <div class="voice-info ms-3">
+                                            <h6 class="name">${friendlyName}</h6>
+                                            <span class="badge free">Free</span>
+                                        </div>
                                     </div>
                                 </div>`;
                             $('#voiceList').append(voiceCard);

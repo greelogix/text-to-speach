@@ -215,17 +215,18 @@
                         $.each(voices, function (index, voice) {
                             let friendlyName = extractVoiceName(voice.friendly_name);
                             let voiceCard = `
-                                <div class="col-12 mb-2">
-                                    <div class="voice-card p-3 text-center d-flex justify-content-around align-items-center" data-voice="${voice.short_name}" style="border-radius: 10px; cursor: pointer;">
-                                        <div class="d-flex">
-                                          <img src="{{asset('image/images.png')}}" alt="${friendlyName}" width="40">
-                                          <span class="free">Free</span>
+                               <div class="col-12 mb-3">
+                                    <div class="voice-card p-3 d-flex align-items-center" data-voice="${voice.short_name}">
+                                        <div class="voice-img">
+                                            <img src="{{asset('image/images.png')}}" alt="${friendlyName}">
                                         </div>
-                                         <div>
-                                             <h6 class="name">${friendlyName}</h6>
-                                         </div>
+                                        <div class="voice-info ms-3">
+                                            <h6 class="name">${friendlyName}</h6>
+                                            <span class="badge free">Free</span>
+                                        </div>
                                     </div>
-                                </div>`;
+                                </div>
+                                `;
                             $('#voiceList').append(voiceCard);
                         });
 

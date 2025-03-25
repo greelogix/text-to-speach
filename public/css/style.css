@@ -19,13 +19,13 @@ textarea, select {
     border-radius: 10px;
 }
 #convertBtn {
-    background: #ff7eb3;
+    background: #6f42c1;
     border: none;
     font-weight: bold;
     transition: 0.3s;
 }
 #convertBtn:hover {
-    background: #ff4f81;
+    background: #6f42c1;
 }
 #audio-container {
     background: rgba(255, 255, 255, 0.1);
@@ -197,28 +197,55 @@ textarea, select {
   left: 0px;
 }
 
-  .voice-card {
-    border: 1px solid lightgray;
-    padding: 15px;
-    text-align: center;
-    border-radius: 10px;
-    transition: 0.3s;
-  }
-  .voice-card:hover, .voice-card.active {
-    border-color: #6f42c1;
-    box-shadow: 0 0 10px rgba(111, 66, 193, 0.3);
-  }
-.voice-card img {
+.voice-card {
+  border: 2px solid transparent;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  padding: 15px;
+  border-radius: 12px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.voice-card:hover, .voice-card.active {
+  border-color: #6f42c1;
+  box-shadow: 0 6px 12px rgba(111, 66, 193, 0.3);
+  background: linear-gradient(135deg, #6f42c1, #9b59b6);
+  color: white;
+}
+
+.voice-card:hover .free {
+  background: #ff9800;
+  color: white;
+}
+
+.voice-img img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   background-color: #f0f0f0;
+  border: 2px solid #6f42c1;
+  padding: 5px;
 }
-.voice-card .free {
-  color: orange;
-  font-size: 12px;
+
+.voice-info h6 {
+  margin: 0;
+  font-size: 16px;
   font-weight: bold;
 }
+
+.voice-info .free {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background: orange;
+  padding: 3px 8px;
+  border-radius: 8px;
+}
+
+
 .font-family{
   font-family: monospace;
 }
