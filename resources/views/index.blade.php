@@ -156,11 +156,18 @@
                 <button class="btn btn-primary btn-lg btn-free">Start Free Trial</button>
             </div>
             <div class="col-6">
-                @foreach($audioSamples as $audio)
                     <audio controls class="w-100 mb-2">
-                        <source src="data:audio/mpeg;base64,{{ $audio->audio_base64 }}" type="audio/mpeg">
+                        <source src="{{ asset('storage/tts_audio_1742904189.mp3') }}" type="audio/mpeg">
                     </audio>
-                @endforeach
+                    <audio controls class="w-100 mb-2">
+                        <source src="{{ asset('storage/tts_audio_1742904213.mp3') }}" type="audio/mpeg">
+                    </audio>
+                    <audio controls class="w-100 mb-2">
+                        <source src="{{ asset('storage/tts_audio_1742904233.mp3') }}" type="audio/mpeg">
+                    </audio>
+                    <audio controls class="w-100 mb-2">
+                        <source src="{{ asset('storage/tts_audio_1742904304.mp3') }}" type="audio/mpeg">
+                    </audio>
             </div>
         </div>
     </div>

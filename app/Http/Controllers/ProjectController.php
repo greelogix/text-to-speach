@@ -70,15 +70,5 @@ class ProjectController extends Controller
             return redirect()->back()->with('success', 'Voice deleted successfully.');
         }
         return redirect()->back()->with('error', 'Voice not found.');
-    }
-
-    public function sample_audio()
-    {
-        $audioSamples = AudioSample::get();
-        if ($audioSamples->isEmpty()) {
-            return redirect()->back()->with('error', 'No audio samples found.');
-        }
-        return view('index', compact('audioSamples'));
-    }
-    
+    }    
 }

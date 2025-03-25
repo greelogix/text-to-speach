@@ -151,7 +151,11 @@ class TTSController extends Controller
             ]);
     
             $audioData = $tts->toBase64();
-            
+
+            // $audioBinary = base64_decode($audioData);
+            // $audioFileName = 'tts_audio_' . time() . '.mp3';
+            // Storage::disk('public')->put($audioFileName, $audioBinary);
+
             if (empty($audioData)) {
                 throw new \Exception("Failed to generate speech audio.");
             }
