@@ -131,6 +131,42 @@
   font-weight: bold;
 }
 
+@media (max-width: 768px) { 
+    .hero {
+        padding: 100px 0px;
+    }
+    .row-feature {
+        flex-direction: column;
+        align-items: center;
+    }
+    .d-flex-feature {
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+    }
+
+    .btn-group-convert {
+        width: 100%;
+        text-align: center;
+    }
+
+    .btn-group-convert .dropdown-toggle {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .btn-free{
+        margin-top: 10px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+    .card-style{
+        padding: 10px 10px !important;
+     }
+}
+
 
     </style>
 </head>
@@ -149,13 +185,13 @@
 <section class="hero mt-5">
     <div class="container">
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-md-6 mb-4">
                 <h1>Convert Text to Professional Voiceovers in 50+ Languages</h1>
                 <p class="lead">Instant text-to-speech, AI voiceovers & audio/video to text transcription – fast, affordable & multilingual.</p>
                 <a href="#features" class="btn btn-primary btn-lg">Explore Features</a>
                 <button class="btn btn-primary btn-lg btn-free">Start Free Trial</button>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742904189.mp3') }}" type="audio/mpeg">
                     </audio>
@@ -178,14 +214,14 @@
         <div class="d-flex justify-content-between align-items-baseline w-100">
             <h2 class="text-center fw-bold mb-4 mx-auto">Text to Speech Converter</h2>
         </div>
-        <div class="card p-4">
+        <div class="card card-style p-4">
                 <div class="mb-3">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12 col-md-6 mb-3">
                             <label for="title" class="form-label font-family">Title</label>
                             <input type="text" id="title" class="form-control shadow-none border-style" placeholder="Enter file name">
                         </div>
-                        <div class="col-6 d-grid">
+                        <div class="col-12 col-md-6 d-grid">
                             <label for="languageDropdown" class="form-label font-family">Language</label>
                             <select id="languageDropdown" class="form-control shadow-none">
                                 <option value="h-20" style="30px">Select Language</option>
@@ -199,8 +235,8 @@
                     <label for="text" class="form-label font-family">Enter Your Text</label>
                     <textarea id="text" class="form-control shadow-none border-style" rows="15" placeholder="Enter text here..."></textarea>
                 </div>
-                <div class="row">
-                    <div class="d-flex pb-4 pt-4 align-items-center gap-5 ">
+                <div class="row row-feature">
+                    <div class="d-flex d-flex-feature pb-4 pt-4 align-items-center gap-5 ">
                         <div class="btn-group dropup cursor">
                             <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="{{asset('image/images.png')}}" alt="" width="40">
@@ -212,63 +248,63 @@
                                 <input type="hidden" id="selectedVoice">
                             </div>
                         </div>
+                        <div class="btn-group dropup d-flex align-items-center gap-2 cursor">
+                            <span>
+                            <img src="{{asset('image/skating.png')}}" alt=""  width="25">
+                            </span>
+                            <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Speech Speed
+                            </div>
+                            <div class="custom-modal dropdown-menu">
+                                <h5 class="fw-bold">Normal</h5>
+                                <div class="d-flex justify-content-around">
+                                    <div class="d-flex justify-content-center align-items-center gap-3">
+                                        <button class="btn-circle decrease">−</button>
+                                        <input type="number" id="rate" name="rate" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
+                                        <button class="btn-circle increase">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-group dropup gap-2">
+                            <span>
+                                <img src="{{asset('image/microphone-alt.png')}}" alt=""  width="25">
+                            </span>
+                            <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Pitch
+                            </div>
+                            <div class="custom-modal dropdown-menu">
+                                <h5 class="fw-bold">Voice Pitch</h5>
+                                <div class="d-flex justify-content-around">
+                                    <div class="d-flex justify-content-center align-items-center gap-3">
+                                        <button class="btn-circle decrease">−</button>
+                                        <input type="number" id="pitch" name="pitch" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
+                                        <button class="btn-circle increase">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-                      <div class="btn-group dropup d-flex align-items-center gap-2 cursor">
-                        <span>
-                           <img src="{{asset('image/skating.png')}}" alt=""  width="25">
-                        </span>
-                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Speech Speed
-                        </div>
-                        <div class="custom-modal dropdown-menu">
-                            <h5 class="fw-bold">Normal</h5>
-                            <div class="d-flex justify-content-around">
-                                <div class="d-flex justify-content-center align-items-center gap-3">
-                                    <button class="btn-circle decrease">−</button>
-                                    <input type="number" id="rate" name="rate" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
-                                    <button class="btn-circle increase">+</button>
+                        <div class="btn-group dropup gap-2">
+                            <span>
+                                <img src="{{asset('image/volume.png')}}" alt=""  width="25">
+                            </span>
+                            <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                Volume
+                            </div>
+                            <div class="custom-modal dropdown-menu">
+                                <h5 class="fw-bold">Volume</h5>
+                                <div class="d-flex justify-content-around">
+                                    <div class="d-flex justify-content-center align-items-center gap-3">
+                                        <button class="btn-circle decrease">−</button>
+                                        <input type="number" id="volume" name="volume" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
+                                        <button class="btn-circle increase">+</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <button class="btn btn-primary w-100" id="convertBtn">Convert to Speech</button>
                     </div>
-                    <div class="btn-group dropup gap-2">
-                        <span>
-                            <img src="{{asset('image/microphone-alt.png')}}" alt=""  width="25">
-                         </span>
-                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Pitch
-                        </div>
-                        <div class="custom-modal dropdown-menu">
-                            <h5 class="fw-bold">Voice Pitch</h5>
-                            <div class="d-flex justify-content-around">
-                                <div class="d-flex justify-content-center align-items-center gap-3">
-                                    <button class="btn-circle decrease">−</button>
-                                    <input type="number" id="pitch" name="pitch" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
-                                    <button class="btn-circle increase">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="btn-group dropup gap-2">
-                        <span>
-                            <img src="{{asset('image/volume.png')}}" alt=""  width="25">
-                         </span>
-                        <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            Volume
-                        </div>
-                        <div class="custom-modal dropdown-menu">
-                            <h5 class="fw-bold">Volume</h5>
-                            <div class="d-flex justify-content-around">
-                                <div class="d-flex justify-content-center align-items-center gap-3">
-                                    <button class="btn-circle decrease">−</button>
-                                    <input type="number" id="volume" name="volume" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
-                                    <button class="btn-circle increase">+</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary w-100" id="convertBtn">Convert to Speech</button>
                 </div>
                 <div class="mt-3" id="audio-container" style="display: none;">
                     <audio id="audio" controls class="w-100"></audio>

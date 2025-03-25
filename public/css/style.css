@@ -261,10 +261,51 @@ textarea, select {
   align-items: center;
   border: 1px solid #c6c6c6;
 }
+
 .border-style{
   border: 1px solid #c6c6c6;
 }
 .select2-selection__clear{
   display: none !important;
 }
+.d-flex-feature {
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
 
+.row-feature {
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 768px) { 
+  .select2-container .select2-selection--single {
+    height: 38px !important;
+    width: 320px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #c6c6c6;
+  }
+
+}
+
+@media (max-width: 540px) { 
+  .select2-container .select2-selection--single {
+    height: 38px !important;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #c6c6c6;
+  }
+}
+
+@media (max-width: 320px) { 
+  .select2-container .select2-selection--single {
+    height: 38px !important;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #c6c6c6;
+  }
+}

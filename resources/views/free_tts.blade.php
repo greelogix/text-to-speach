@@ -15,22 +15,21 @@
 </head>
 <body class="bg-light">
     <div class="container mt-4">
-            <div class="d-flex justify-content-between align-items-baseline w-100">
-                <h2 class="text-center fw-bold mb-4 mx-auto">Text to Speech Converter</h2>
-                <div>
-                    <a href="{{ route('register.form') }}" class="btn btn-success btn-sm">Sign up</a>
-                    <a href="{{ route('login') }}" class="btn btn-primary btn-sm">Login</a>
+                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center w-100 mb-4">
+                    <h2 class="text-center fw-bold mb-4 mb-md-0 mx-auto mx-md-0">Text to Speech Converter</h2>
+                    <div class="d-flex gap-2">
+                        <a href="{{ route('register.form') }}" class="btn btn-success btn-sm">Sign up</a>
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-sm">Login</a>
+                    </div>
                 </div>
-            </div>
-            
             <div class="card p-4">
                     <div class="mb-3">
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-12 col-md-6 mb-3">
                                 <label for="title" class="form-label font-family">Title</label>
                                 <input type="text" id="title" class="form-control shadow-none border-style" placeholder="Enter file name">
                             </div>
-                            <div class="col-6">
+                            <div class="col-12 col-md-6">
                                 <label for="languageDropdown" class="form-label font-family">Language</label>
                                 <select id="languageDropdown" class="form-control shadow-none">
                                     <option value="h-20" style="30px">Select Language</option>
@@ -44,13 +43,8 @@
                         <label for="text" class="form-label font-family">Enter Your Text</label>
                         <textarea id="text" class="form-control shadow-none border-style" rows="15" placeholder="Enter text here..."></textarea>
                     </div>
-                    {{-- <div class="mb-3">
-                        <select id="languageDropdown" class="form-select">
-                            <option value="">Select Language</option>
-                        </select>
-                    </div> --}}
-                    <div class="row">
-                        <div class="d-flex pb-4 pt-4 align-items-center gap-5 ">
+                    <div class="row row-feature">
+                        <div class="d-flex d-flex-feature pb-4 pt-4 align-items-center gap-5 ">
                             <div class="btn-group dropup cursor">
                                 <div class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     <img src="{{asset('image/images.png')}}" alt="" width="40">
@@ -78,11 +72,6 @@
                                         <input type="number" id="rate" name="rate" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
                                         <button class="btn-circle increase">+</button>
                                     </div>
-                                    {{-- <div class="slider-container">
-                                        <div class="custom-slider">
-                                            <div class="slider-thumb"></div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -101,11 +90,6 @@
                                         <input type="number" id="pitch" name="pitch" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
                                         <button class="btn-circle increase">+</button>
                                     </div>
-                                    {{-- <div class="slider-container">
-                                        <div class="custom-slider">
-                                            <div class="slider-thumb"></div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -125,11 +109,6 @@
                                         <input type="number" id="volume" name="volume" class="form-control text-center shadow-none" min="-100" max="100" step="1" value="1" style="width: 75px;">
                                         <button class="btn-circle increase">+</button>
                                     </div>
-                                    {{-- <div class="slider-container">
-                                        <div class="custom-slider">
-                                            <div class="slider-thumb"></div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                         </div>
@@ -139,7 +118,7 @@
                         <audio id="audio" controls class="w-100"></audio>
                     </div>
                 </div>
-            </div>
+ </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
