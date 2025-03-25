@@ -2,8 +2,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Project;
-use App\Models\Voice;
+use App\Models\{Project,Voice,AudioSample};
 use Illuminate\Support\Facades\Auth;
 
 class ProjectController extends Controller
@@ -72,4 +71,14 @@ class ProjectController extends Controller
         }
         return redirect()->back()->with('error', 'Voice not found.');
     }
+
+    public function sample_audio()
+    {
+        $audioSamples = AudioSample::get();
+        if ($audioSamples->isEmpty()) {
+            return redirect()->back()->with('error', 'No audio samples found.');
+        }
+        return view('index', compact('audioSamples'));
+    }
+    
 }

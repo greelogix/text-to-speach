@@ -13,9 +13,10 @@ Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
 
-Route::get('/', function () {
-    return view('index');
-})->name('index.page');
+// Route::get('/', function () {
+//     return view('index');
+// })->name('index.page');
+Route::get('/', [ProjectController::class, 'sample_audio'])->name('index.page');
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
