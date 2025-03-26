@@ -309,3 +309,19 @@ textarea, select {
     border: 1px solid #c6c6c6;
   }
 }
+
+@media (max-width: 1440px) { 
+  .select2-container .select2-selection--single {
+    width: 550px;
+  }
+}
+
+@media (max-width: 1024px) { 
+  .select2-container .select2-selection--single {
+    width: 500px;
+  }
+  .sidebar {
+    display: none;
+  }
+
+}
