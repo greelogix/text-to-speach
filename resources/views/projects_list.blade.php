@@ -8,9 +8,6 @@
   .sidebar-style {
     display: none;
   }
-.modal-backdrop {
-  display: none !important;
-}
 }
 </style>
 <body class="bg-light">
