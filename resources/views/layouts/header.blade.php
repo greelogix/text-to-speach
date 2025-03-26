@@ -41,30 +41,29 @@ $user = Auth::user();
                         <i class="fas fa-user me-2 text-dark"></i> Profile
                     </a>
                 </li>
-                <li>
-                    <a class="dropdown-item" href="{{ route('logout') }}">
-                        <i class="fas fa-sign-out-alt me-2 text-dark"></i> Logout
-                    </a>
-                </li>
-                <li>
+                <li class="mt-1">
                     <a href="{{ route('projects.list') }}" class="d-block px-3 py-2 rounded text-white text-decoration-none hover-bg-dark hover-text-primary d-flex align-items-center">
                         <i class="fas fa-home me-2 text-dark"></i> 
                         <span class="sidebar-text text-dark">Dashboard</span>
                     </a>
                 </li>
-                <li>
+                <li class="mt-1">
                     <a href="{{ route('generate_speech_page') }}" class="d-block px-3 py-2 rounded text-white text-decoration-none hover-bg-dark hover-text-primary d-flex align-items-center">
                         <i class="fa-solid fa-language me-2 text-dark"></i>
                         <span class="sidebar-text text-dark">Text to Speech</span>
                     </a>
                 </li>
-                <li>
+                <li class="mt-1">
                     <a href="{{ route('apikey-page') }}" class="d-block px-4 py-2 rounded text-white text-decoration-none hover-bg-dark hover-text-primary d-flex align-items-center">
                         <i class="fa-solid fa-key me-2 text-dark"></i>
                         <span class="sidebar-text text-dark">API Key & Endpoint Generation</span>
                     </a>
                 </li>  
-                
+                <li class="mt-3">
+                    <a class="dropdown-item" href="{{ route('logout') }}">
+                        <i class="fas fa-sign-out-alt me-2 text-dark"></i> Logout
+                    </a>
+                </li> 
                </ul>
             </div>
         </div>
