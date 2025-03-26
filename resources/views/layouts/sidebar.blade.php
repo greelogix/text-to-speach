@@ -13,6 +13,12 @@
                     <span class="sidebar-text text-dark">Text to Speech</span>
                 </a>
             </li>
+            <li class="pt-2">
+                <a href="{{ route('apikey-page') }}" class="d-block px-4 py-2 rounded text-white text-decoration-none hover-bg-dark hover-text-primary d-flex align-items-center">
+                    <i class="fa-solid fa-key me-2 text-dark"></i>
+                    <span class="sidebar-text text-dark">API Key & Endpoint Generation</span>
+                </a>
+            </li>            
         </ul>        
     </div>
 </div>

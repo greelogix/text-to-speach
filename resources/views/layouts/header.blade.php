@@ -29,7 +29,7 @@ $user = Auth::user();
                     id="dropdownMenuButton1" 
                     data-bs-toggle="dropdown" 
                     aria-expanded="false" 
-                    style="border: none; background: none;">
+                    style="border: none; background: none; position: relative; top: 6px;">
                     <p class="medium-screen-nav">
                         <span>{{ $user->name }}</span>
                         <span><i class="fa-solid fa-bars"></i></span>
@@ -58,6 +58,12 @@ $user = Auth::user();
                         <span class="sidebar-text text-dark">Text to Speech</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('apikey-page') }}" class="d-block px-4 py-2 rounded text-white text-decoration-none hover-bg-dark hover-text-primary d-flex align-items-center">
+                        <i class="fa-solid fa-key me-2 text-dark"></i>
+                        <span class="sidebar-text text-dark">API Key & Endpoint Generation</span>
+                    </a>
+                </li>  
                 
                </ul>
             </div>

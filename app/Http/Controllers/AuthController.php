@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use App\Models\ApiKey;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -66,7 +68,32 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login')->with('success', 'Logged out successfully.');
     }
+
+    public function index_key(){
+      $user = Auth::user();
+      $apiKey = $user ? ApiKey::where('user_id', $user->id)->first() : null;
+      return view('api_key_generate_page', compact('apiKey'));
+    }
+
+
+    public function generateApiKey(Request $request)
+    {
+        $request->validate([
+            'purpose' => 'required|string|max:255',
+        ]);
     
+        $user = Auth::user();
     
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'You need to log in first.');
+        }
+    
+        $apiKey = ApiKey::firstOrCreate(
+            ['user_id' => $user->id],
+            ['key' => Str::random(32), 'quota' => 100, 'purpose' => $request->purpose]
+        );
+    
+        return redirect()->route('apikey-page')->with('success', 'API Key generated successfully.')->with('apiKey', $apiKey);
+    }
 }
 

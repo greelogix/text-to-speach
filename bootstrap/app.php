@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Middleware\CheckTTSLimit;
+use App\Http\Middleware\{CheckTTSLimit,ApiKeyMiddleware};
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'check.tts.limit' => CheckTTSLimit::class,
+            'api_key' => ApiKeyMiddleware::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
