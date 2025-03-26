@@ -129,7 +129,8 @@
     $(document).ready(function () {
         $("#languageDropdown").select2({
             placeholder: "Select a language",
-            allowClear: true
+            allowClear: true,
+            width: '100%',
         });
 
         $.get('/languages', function (data) {

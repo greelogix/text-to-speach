@@ -279,49 +279,9 @@ textarea, select {
   align-items: center;
 }
 
-@media (max-width: 768px) { 
-  .select2-container .select2-selection--single {
-    height: 38px !important;
-    width: 320px;
-    display: flex;
-    align-items: center;
-    border: 1px solid #c6c6c6;
-  }
-
-}
-
-@media (max-width: 540px) { 
-  .select2-container .select2-selection--single {
-    height: 38px !important;
-    width: 300px;
-    display: flex;
-    align-items: center;
-    border: 1px solid #c6c6c6;
-  }
-}
-
-@media (max-width: 320px) { 
-  .select2-container .select2-selection--single {
-    height: 38px !important;
-    width: 250px;
-    display: flex;
-    align-items: center;
-    border: 1px solid #c6c6c6;
-  }
-}
-
-@media (max-width: 1440px) { 
-  .select2-container .select2-selection--single {
-    width: 550px;
-  }
-}
-
 @media (max-width: 1024px) { 
-  .select2-container .select2-selection--single {
-    width: 500px;
-  }
-  .sidebar {
+  .sidebar-style {
     display: none;
   }
-
 }
+

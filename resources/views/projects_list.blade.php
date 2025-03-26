@@ -4,6 +4,14 @@
     nav .text-muted{
     color: black !important;
    }
+   @media (max-width: 1024px) { 
+  .sidebar-style {
+    display: none;
+  }
+.modal-backdrop {
+  display: none !important;
+}
+}
 </style>
 <body class="bg-light">
     <div class="container mt-4">

@@ -2,27 +2,64 @@
 // $user = auth_user();
 $user = Auth::user();
 @endphp
-    <div class="container-fluid d-flex justify-content-between align-items-center shadow p-3 bg-body">
+<style>
+@media (max-width: 1024px) {
+      .medium-screen-nav span:first-child,.Profile-Image {
+      display: none;
+  }
+}
+
+@media (min-width: 1025px) {
+  .medium-screen-nav span:last-child {
+      display: none;
+  }
+}
+</style>
+    <div class="container-fluid d-flex flex-md-row flex-sm-row justify-content-between align-items-center shadow p-3 bg-body">
         <div style="position: relative; left: 15px;">
             <h5>Dashboard</h5>
         </div>
-        <div class="d-flex align-items-center gap-3" style="position: relative; right: 15px;">
-            <img src="{{ $user->image ? Storage::url($user->image) : asset('logo/default-profile.jpg') }}" 
-                 class="rounded-circle border" 
-                 alt="Profile Image" 
-                 style="height: 35px; width: 35px;">
-            <div class="dropdown">
-                <button class="dropdown-toggle text-black" 
-                        id="dropdownMenuButton1" 
-                        data-bs-toggle="dropdown" 
-                        aria-expanded="false" 
-                        style="border: none; background: none;">
-                    {{ $user->name }}
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item cursor-pointer" data-bs-toggle="modal" data-bs-target="#profileModal">Profile</a></li>
-                    <li><a class="dropdown-item" href="{{ route('logout') }}">Logout</a></li>
-                </ul>
+        <div class="d-flex align-items-center gap-3  flex-row" style="position: relative; right: 15px;">
+                <img src="{{ $user->image ? Storage::url($user->image) : asset('logo/default-profile.jpg') }}" 
+                class="rounded-circle border Profile-Image" 
+                alt="Profile Image" 
+                style="height: 35px; width: 35px;">
+           <div class="dropdown">
+            <button class="dropdown-toggle text-black d-flex" 
+                    id="dropdownMenuButton1" 
+                    data-bs-toggle="dropdown" 
+                    aria-expanded="false" 
+                    style="border: none; background: none;">
+                    <p class="medium-screen-nav">
+                        <span>{{ $user->name }}</span>
+                        <span><i class="fa-solid fa-bars"></i></span>
+                    </p> 
+            </button>
+               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1" style="min-width: 250px;">
+                <li>
+                    <a class="dropdown-item cursor-pointer" data-bs-toggle="modal" data-bs-target="#profileModal">
+                        <i class="fas fa-user me-2 text-dark"></i> Profile
+                    </a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="{{ route('logout') }}">
+                        <i class="fas fa-sign-out-alt me-2 text-dark"></i> Logout
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('projects.list') }}" class="d-block px-3 py-2 rounded text-white text-decoration-none hover-bg-dark hover-text-primary d-flex align-items-center">
+                        <i class="fas fa-home me-2 text-dark"></i> 
+                        <span class="sidebar-text text-dark">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('generate_speech_page') }}" class="d-block px-3 py-2 rounded text-white text-decoration-none hover-bg-dark hover-text-primary d-flex align-items-center">
+                        <i class="fa-solid fa-language me-2 text-dark"></i>
+                        <span class="sidebar-text text-dark">Text to Speech</span>
+                    </a>
+                </li>
+                
+               </ul>
             </div>
         </div>
     </div>

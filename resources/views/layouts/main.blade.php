@@ -11,16 +11,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.flaticon.com/path-to-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-light">
     @include('layouts.header') 
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-2 p-0 shadow-sm p-3 mb-5 bg-body" style="height: 100vh">
+        <div class="row medium-screen-width">
+            <div class="col-md-2 p-0 shadow-sm p-3 mb-5 bg-body sidebar-style" style="height: 100vh">
                 @include('layouts.sidebar')
             </div>
-            <div class="col-md-10">
+            <div class="col-xl-10 col-lg-12 col-md-12 col-sm-12">
                 @yield('content')
             </div>
         </div>
