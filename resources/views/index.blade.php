@@ -193,7 +193,7 @@
             </div>
             <div class="col-12 col-md-6">
                      {{-- locall --}}
-                    {{-- <audio controls class="w-100 mb-2">
+                    <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742904189.mp3') }}" type="audio/mpeg">
                     </audio>
                     <audio controls class="w-100 mb-2">
@@ -204,10 +204,10 @@
                     </audio>
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742904304.mp3') }}" type="audio/mpeg">
-                    </audio> --}}
+                    </audio>
                     
                        {{-- live --}}
-                    <audio controls class="w-100 mb-2">
+                    {{-- <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742970696.mp3') }}" type="audio/mpeg">
                     </audio>
                     <audio controls class="w-100 mb-2">
@@ -218,7 +218,7 @@
                     </audio>
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742970713.mp3') }}" type="audio/mpeg">
-                    </audio>
+                    </audio> --}}
             </div>
         </div>
     </div>

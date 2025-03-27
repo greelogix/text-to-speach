@@ -90,7 +90,7 @@ class AuthController extends Controller
     
         $apiKey = ApiKey::firstOrCreate(
             ['user_id' => $user->id],
-            ['key' => Str::random(32), 'quota' => 100, 'purpose' => $request->purpose]
+            ['key' => Str::random(32), 'quota' => 100]
         );
     
         return redirect()->route('apikey-page')->with('success', 'API Key generated successfully.')->with('apiKey', $apiKey);

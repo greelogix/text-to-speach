@@ -40,7 +40,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/project/{project_id}', [ProjectController::class, 'index'])->name('voices.index');
     Route::get('/apikey-page',[AuthController::class, 'index_key'])->name('apikey-page');
     
-    Route::post('/api/key/generate', [AuthController::class, 'generateApiKey'])->name('api.key.generate')->middleware('auth');
+    Route::post('/api/key/generate', [AuthController::class, 'generateApiKey'])->name('api.key.generate');
    
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
     
