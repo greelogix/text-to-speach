@@ -11,7 +11,7 @@ class TextToSpeechController extends Controller
     public function synthesize(Request $request)
     {
         $request->validate([
-            'text' => 'required|string|max:1000',
+            'text' => 'required|string|max:5000',
             'voice' => 'required|string',
             'rate' => 'nullable|string',
             'volume' => 'nullable|string',
