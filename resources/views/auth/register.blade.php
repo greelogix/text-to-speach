@@ -31,7 +31,7 @@
             
             <div class="mb-3">
                 <label>Password</label>
-                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror">
+                <input type="password" name="password" class="form-control  shadow-none @error('password') is-invalid @enderror">
                 @error('password')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
@@ -39,7 +39,7 @@
             
             <div class="mb-3">
                 <label>Confirm Password</label>
-                <input type="password" name="password_confirmation" class="form-control @error('password_confirmation') is-invalid @enderror">
+                <input type="password" name="password_confirmation" class="form-control  shadow-none @error('password_confirmation') is-invalid @enderror">
                 @error('password_confirmation')
                     <span class="text-danger">{{ $message }}</span>
                 @enderror
