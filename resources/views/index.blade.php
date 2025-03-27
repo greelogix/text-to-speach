@@ -176,6 +176,7 @@
     <div class="container d-flex justify-content-between align-items-center">
         <a class="navbar-brand fw-bold fs-4 text-dark">MyWebsite</a>
         <div>
+            <a href="{{route('api.docs')}}" class="text-decoration-none me-2 px-2 text-dark">API Keys</a>
             <a href="#" class="text-decoration-none me-2 px-2 text-dark">Pricing</a>
             <a href="#" class="text-decoration-none px-2 text-dark">Contact</a>
         </div>

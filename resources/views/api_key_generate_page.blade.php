@@ -52,7 +52,11 @@
                     curl -X POST "{{ url('/api/text-to-speech') }}" \
                     -H "X-API-KEY: {{ $apiKey->key }}" \
                     -H "Content-Type: application/json" \
-                    -d '{"text": "Hello, world!", "voice": "en-US-AriaNeural"}'
+                    -d '{ "text": "Hello, this is a text-to-speech conversion!",
+                    "voice": "en-US-JennyNeural",
+                    "rate": "0%",
+                    "volume": "0%",
+                    "pitch": "0Hz"}'
                 </code>
             </div>
         </div>

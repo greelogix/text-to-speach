@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('index');
 })->name('index.page');
 
+Route::get('api/docs', function () {
+    return view('api_docs');
+})->name('api.docs');
+
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
