@@ -26,6 +26,9 @@
                 <li><strong>Text-to-Speech:</strong> Convert text into natural-sounding speech using Microsoft Edge's TTS.</li>
                 <li class="mt-3"><strong>Multiple Voices:</strong> Choose from various voices to suit your project.</li>
                 <li class="mt-3"><strong>Audio Export:</strong> Export audio as raw, base64, or a downloadable file.</li>
+                <li class="mt-3"><strong>Pause Feature:</strong> Insert predefined pauses ([0.5s] to [4s]) into the text at the cursor position.</li>  
+                <li class="mt-3"><strong>Pause Format:</strong> Pauses appear as [Xs], where X is the duration in seconds (e.g., [1s], [2.5s]).</li>  
+                <li class="mt-3"><strong>Usage Example:</strong> "Hello, how are [1s] you?" or "I will be there in [2.5s] a moment."</li>  
             </ul>
         </div>
         

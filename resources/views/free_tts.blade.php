@@ -113,6 +113,11 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-12 col-lg-2">
+                                <select id="pause" class="form-control shadow-none">
+        
+                                </select>
+                            </div>    
                         </div>
                     
                         <!-- Buttons Container -->
@@ -133,6 +138,31 @@
 
 <script>
     $(document).ready(function () {
+        let pauseSelect = $("#pause");
+        let textArea = $("#text");
+
+        pauseSelect.html('<option value="">Add Pause</option>'); 
+        for (let i = 0.5; i <= 4; i += 0.5) {
+            pauseSelect.append(`<option value="[${i}s]">${i} sec</option>`);
+        }
+
+        pauseSelect.on("change", function () {
+            let pauseText = $(this).val();
+            if (pauseText) {
+                let cursorPos = textArea.prop("selectionStart");
+                let text = textArea.val();
+                let newText = text.substring(0, cursorPos) + pauseText + text.substring(cursorPos);
+                textArea.val(newText);
+                $(this).val("");
+            }
+        });
+
+        $("#pause").select2({
+            placeholder: "Add Pause",
+            allowClear: true,
+            width: '100%'
+        });
+        
         $("#languageDropdown").select2({
             placeholder: "Select a language",
             allowClear: true,

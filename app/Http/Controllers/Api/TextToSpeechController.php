@@ -8,6 +8,18 @@ use Afaya\EdgeTTS\Service\EdgeTTS;
 
 class TextToSpeechController extends Controller
 {
+
+    public function formatTextWithPauses($text, $spacesPerSecond = 1000) {
+        return preg_replace_callback('/\[(\d+(\.\d+)?)s\]/', function ($matches) use ($spacesPerSecond) {
+            $seconds = (float) $matches[1]; 
+            if ($seconds < 0.5 || $seconds > 4) {
+                return ''; 
+            }
+            $spaces = str_repeat(' ', (int)($seconds * $spacesPerSecond));
+            return $spaces;
+        }, $text);
+    }
+
     public function synthesize(Request $request)
     {
         $request->validate([
@@ -17,6 +29,8 @@ class TextToSpeechController extends Controller
             'volume' => 'nullable|string',
             'pitch' => 'nullable|string',
         ]);
+        
+        $text = $request->input('text');
 
         $apiKey = $request->header('X-API-KEY');
         $keyRecord = ApiKey::where('key', $apiKey)->first();
@@ -24,6 +38,8 @@ class TextToSpeechController extends Controller
         if (!$keyRecord || $keyRecord->quota <= 0) {
             return response()->json(['error' => 'Invalid or expired API Key'], 403);
         }
+
+        $formattedText = $this->formatTextWithPauses($text, 1000);
 
         $tts = new EdgeTTS();
 

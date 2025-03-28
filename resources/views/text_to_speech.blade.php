@@ -22,11 +22,6 @@
                 <label for="text" class="form-label font-family">Enter Your Text</label>
                 <textarea id="text" class="form-control shadow-none" rows="15" placeholder="Enter text here..."></textarea>
             </div>
-            {{-- <div class="mb-3">
-                <select id="languageDropdown" class="form-select">
-                    <option value="">Select Language</option>
-                </select>
-            </div> --}}
             <div class="row">
                 <div class="d-flex flex-wrap pb-4 pt-4 align-items-center gap-3 justify-content-center">
                     <div class="btn-group dropup">
@@ -98,6 +93,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-lg-2">
+                        <select id="pause" class="form-control shadow-none">
+
+                        </select>
+                    </div>                    
                 </div>
             
                 <!-- Buttons Container -->
@@ -137,10 +137,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     $(document).ready(function () {
+        let pauseSelect = $("#pause");
+       let textArea = $("#text");
+
+        pauseSelect.html('<option value="">Add Pause</option>'); 
+        for (let i = 0.5; i <= 4; i += 0.5) {
+            pauseSelect.append(`<option value="[${i}s]">${i} sec</option>`);
+        }
+
+        pauseSelect.on("change", function () {
+            let pauseText = $(this).val();
+            if (pauseText) {
+                let cursorPos = textArea.prop("selectionStart");
+                let text = textArea.val();
+                let newText = text.substring(0, cursorPos) + pauseText + text.substring(cursorPos);
+                textArea.val(newText);
+                $(this).val("");
+            }
+        });
+
+        $("#pause").select2({
+            placeholder: "Add Pause",
+            allowClear: true,
+            width: '100%'
+        });
+
         $("#languageDropdown").select2({
             placeholder: "Select a language",
             allowClear: true,
-            width: '100%'
+            width: '100%',
         });
 
         $.get('/languages', function (data) {

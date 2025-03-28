@@ -23,10 +23,20 @@ class TTSController extends Controller
         return view('free_tts');
     }
 
+    public function formatTextWithPauses($text, $spacesPerSecond = 1000) {
+        return preg_replace_callback('/\[(\d+(\.\d+)?)s\]/', function ($matches) use ($spacesPerSecond) {
+            $seconds = (float) $matches[1]; 
+            if ($seconds < 0.5 || $seconds > 4) {
+                return ''; 
+            }
+            $spaces = str_repeat(' ', (int)($seconds * $spacesPerSecond));
+            return $spaces;
+        }, $text);
+    }
+
     public function generateSpeech(Request $request)
     {
         try {
-
             $request->validate([
                 'text' => 'required|string',
                 'rate' => 'nullable|string|min:-100|max:100',
@@ -37,27 +47,31 @@ class TTSController extends Controller
                 'voice' => 'nullable|string',
                 'saveAudio' => 'nullable|boolean',
             ]);
-    
-            $text = trim($request->input('text'));
+
+            $text = $request->input('text');
             $projectid = $request->input('projectid');
             $project_name = trim($request->input('project_name'));
             $voice = $request->input('voice');
             $saveAudio = $request->boolean('saveAudio');
-    
+
             if (empty($text) || empty($project_name)) {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Text & Project Name cannot be empty',
                 ], 400);
             }
-    
+
+            $formattedText = $this->formatTextWithPauses($text, 1000);
+
+            // dd($formattedText);
+
             $tts = new EdgeTTS();
 
             if (!method_exists($tts, 'synthesize')) {
                 throw new \Exception("EdgeTTS method 'synthesize' does not exist.");
             }
-    
-            $tts->synthesize($text, $voice, [
+
+            $tts->synthesize($formattedText, $voice, [
                 'rate' => $request->rate,
                 'volume' => $request->volume,
                 'pitch' => $request->pitch,
@@ -65,17 +79,12 @@ class TTSController extends Controller
 
             $audioData = $tts->toBase64();
 
-
-            // $audioBinary = base64_decode($audioData);
-            // $audioFileName = 'tts_audio_' . time() . '.mp3';
-            // Storage::disk('public')->put($audioFileName, $audioBinary);
-
             if (empty($audioData)) {
                 throw new \Exception("Failed to generate speech audio.");
             }
-    
+
             $updateMessage = 'no_update';
-    
+
             // Save voice data
             if ($projectid) {
                 Voice::create([
@@ -85,30 +94,30 @@ class TTSController extends Controller
                 ]);
                 $updateMessage = 'update_voice';
             }
-    
+
             if ($saveAudio) {
                 $project = Project::create([
                     'user_id' => Auth::id(),
                     'project_name' => $project_name,
                 ]);
-    
+
                 Voice::create([
                     'project_id' => $project->id,
                     'title' => $project_name,
                     'text_to_audio' => $audioData,
                 ]);
             }
-    
+
             return response()->json([
                 'status' => 'success',
                 'message' => 'TTS processed successfully!',
                 'update_voice' => $updateMessage,
                 'audio_base64' => $audioData, 
             ]);
-    
+
         } catch (\Exception $e) {
             Log::error("Error in generateSpeech method: " . $e->getMessage() . " - Line: " . $e->getLine());
-    
+
             return response()->json([
                 'status' => 'error',
                 'message' => $e->getMessage(),
@@ -116,7 +125,7 @@ class TTSController extends Controller
             ], 500);
         }
     }
-    
+
       public function getLanguages()
         {
             return response()->json(
