@@ -205,8 +205,8 @@
                     </audio>
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742904304.mp3') }}" type="audio/mpeg">
-                    </audio> --}}
-                    
+                    </audio>
+                     --}}
                        {{-- live --}}
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742970696.mp3') }}" type="audio/mpeg">
@@ -228,7 +228,7 @@
 <section class="tts d-none">
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-baseline w-100">
-            <h2 class="text-center fw-bold mb-4 mx-auto">Text to Speech Converter</h2>
+            <h2 class="text-center fw-bold mb-4 mx-auto">Free Text-to-Speech for Guests</h2>
         </div>
         <div class="card card-style p-4">
                 <div class="mb-3">
@@ -505,11 +505,12 @@
                     $currentRow = $('<div class="row mb-2"></div>');
                     $languageContainer.append($currentRow);
                 }
+                var cleanedValue = value.replace(/[()]/g, '');
                 var $col = $(`
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="list-group-item">
                              <a href="/free-${encodeURIComponent(value)}-text-to-speech" data-lang="${key}">
-                                Free [ ${value} ] text to speech
+                                Free ${cleanedValue} text to speech
                             </a>
                         </div>
                     </div>
