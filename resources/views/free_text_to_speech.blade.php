@@ -486,17 +486,44 @@
             allowClear: true,
             width: '100%'
         });
+      
+        function getLangValueFromUrl() {
+            const path = window.location.pathname;
+            const match = path.match(/^\/free-(.*)-text-to-speech$/);
+            return match ? decodeURIComponent(match[1]) : null;
+        }
 
         $.get('/languages', function (data) {
             $('#languageDropdown').empty();
+
             $.each(data, function (key, value) {
-                $('#languageDropdown').append('<option class="h-50" value="' + key + '">' + value + '</option>');
+                $('#languageDropdown').append(`<option value="${key}">${value}</option>`);
             });
-            $('#languageDropdown').val('en-US').trigger('change');
+
+            const langValueFromUrl = getLangValueFromUrl();
+
+            let matchedKey = null;
+            if (langValueFromUrl) {
+                $.each(data, function (key, value) {
+                    if (value.toLowerCase() === langValueFromUrl.toLowerCase()) {
+                        matchedKey = key;
+                        return false;
+                    }
+                });
+            }
+
+            if (matchedKey) {
+                $('#languageDropdown').val(matchedKey).trigger('change');
+                $('.tts').removeClass('d-none');
+                $('html, body').animate({
+                    scrollTop: $('.tts').offset().top
+                }, 500);
+            } else {
+                $('#languageDropdown').val('en-US').trigger('change');
+            }
 
             var $languageContainer = $('.free_lg_tts');
             $languageContainer.empty();
-
             var counter = 0;
             var $currentRow;
 
@@ -505,10 +532,11 @@
                     $currentRow = $('<div class="row mb-2"></div>');
                     $languageContainer.append($currentRow);
                 }
+
                 var $col = $(`
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="list-group-item">
-                             <a href="/free-${encodeURIComponent(value)}-text-to-speech" data-lang="${key}">
+                            <a href="/free-${encodeURIComponent(value)}-text-to-speech" data-lang="${key}">
                                 Free [ ${value} ] text to speech
                             </a>
                         </div>
@@ -525,8 +553,9 @@
                 $('html, body').animate({
                     scrollTop: $('.tts').offset().top
                 }, 500);
-                });
+            });
         });
+
 
         $('#languageDropdown').on('change', function () {
             var locale = $(this).val();
