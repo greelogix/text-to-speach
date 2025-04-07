@@ -21,6 +21,11 @@ Route::get('api/docs', function () {
     return view('api_docs');
 })->name('api.docs');
 
+Route::get('free/ttsvoiceover', function () {
+    return view('index');
+})->name('free.ttsvoiceover');
+
+
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 

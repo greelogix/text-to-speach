@@ -174,7 +174,7 @@
 <!-- navbar -->
 <nav class="navbar navbar-light bg-white shadow-sm fixed-top w-100">
     <div class="container d-flex justify-content-between align-items-center">
-        <a class="navbar-brand fw-bold fs-4 text-dark">MyWebsite</a>
+        <a class="navbar-brand fw-bold fs-4 text-dark">ttsvoiceover</a>
         <div>
             <a href="{{route('api.docs')}}" class="text-decoration-none me-2 px-2 text-dark">API Keys</a>
             <a href="#" class="text-decoration-none me-2 px-2 text-dark">Pricing</a>
@@ -205,8 +205,8 @@
                     </audio>
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742904304.mp3') }}" type="audio/mpeg">
-                    </audio> --}}
-                    
+                    </audio>
+                     --}}
                        {{-- live --}}
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742970696.mp3') }}" type="audio/mpeg">
@@ -225,7 +225,7 @@
     </div>
 </section>
 <!-- text to speech Section -->
-<section class="tts  d-none">
+<section class="tts d-none">
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-baseline w-100">
             <h2 class="text-center fw-bold mb-4 mx-auto">Text to Speech Converter</h2>
@@ -404,6 +404,21 @@
     </div>
 </section>
 
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-4">Free English Text To Speech</h2>
+        <div class="row">
+            <div class="col-12">
+                <div class="free_lg_tts">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
 <!-- Call to Action Section -->
 <section class="cta-section">
     <h2>Start Creating Professional Voiceovers Today!</h2>
@@ -473,11 +488,43 @@
         });
 
         $.get('/languages', function (data) {
+            $('#languageDropdown').empty();
             $.each(data, function (key, value) {
                 $('#languageDropdown').append('<option class="h-50" value="' + key + '">' + value + '</option>');
             });
             $('#languageDropdown').val('en-US').trigger('change');
-        });
+
+            var $languageContainer = $('.free_lg_tts');
+            $languageContainer.empty();
+
+            var counter = 0;
+            var $currentRow;
+
+            $.each(data, function (key, value) {
+                if (counter % 4 === 0) {
+                    $currentRow = $('<div class="row mb-2"></div>');
+                    $languageContainer.append($currentRow);
+                }
+                var $col = $(`
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="list-group-item">
+                            <a href="javascript:void(0)" data-lang="${key}">${value}</a>
+                        </div>
+                    </div>
+                `);
+                $currentRow.append($col);
+                counter++;
+            });
+
+            $('.free_lg_tts a').on('click', function () {
+                var selectedLang = $(this).data('lang');
+                $('#languageDropdown').val(selectedLang).trigger('change');
+                $('.tts').removeClass('d-none');
+                $('html, body').animate({
+                    scrollTop: $('.tts').offset().top
+                }, 500);
+                });
+            });
 
         $('#languageDropdown').on('change', function () {
             var locale = $(this).val();

@@ -138,7 +138,7 @@
 <script>
     $(document).ready(function () {
         let pauseSelect = $("#pause");
-       let textArea = $("#text");
+        let textArea = $("#text");
 
         pauseSelect.html('<option value="">Add Pause</option>'); 
         for (let i = 0.5; i <= 4; i += 0.5) {
