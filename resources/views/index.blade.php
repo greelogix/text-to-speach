@@ -205,8 +205,8 @@
                     </audio>
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742904304.mp3') }}" type="audio/mpeg">
-                    </audio>
-                     --}}
+                    </audio> --}}
+                    
                        {{-- live --}}
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742970696.mp3') }}" type="audio/mpeg">
@@ -505,11 +505,14 @@
                     $currentRow = $('<div class="row mb-2"></div>');
                     $languageContainer.append($currentRow);
                 }
-                var cleanedValue = value.replace(/[()]/g, '');
-                var $col = $(`
+
+                const cleanedUrlValue = value.replace(/[()]/g, '').trim().replace(/\s+/g, '-').toLowerCase();
+                const cleanedValue = value.replace(/[()]/g, '').trim();
+
+                const $col = $(`
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="list-group-item">
-                             <a href="/free-${encodeURIComponent(value)}-text-to-speech" data-lang="${key}">
+                            <a href="/free-${cleanedUrlValue}-text-to-speech" data-lang="${key}">
                                 Free ${cleanedValue} text to speech
                             </a>
                         </div>

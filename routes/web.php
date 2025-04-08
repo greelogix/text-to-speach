@@ -23,7 +23,7 @@ Route::get('api/docs', function () {
 
 Route::get('/free-{lang}-text-to-speech', function ($lang) {
     return view('free_text_to_speech', ['lang' => $lang]);
-})->name('free-text-to-speech');
+})->where('lang', '[A-Za-z\-]+')->name('free-text-to-speech');
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');

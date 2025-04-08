@@ -486,13 +486,20 @@
             allowClear: true,
             width: '100%'
         });
-      
+
         function getLangValueFromUrl() {
             const path = window.location.pathname;
             const match = path.match(/^\/free-(.*)-text-to-speech$/);
-            return match ? decodeURIComponent(match[1]) : null;
+            return match ? match[1].replace(/-/g, ' ') : null;
         }
 
+        function normalize(str) {
+            return str.replace(/[()]/g, '')
+                    .replace(/-/g, ' ')
+                    .replace(/\s+/g, ' ')
+                    .toLowerCase()
+                    .trim();
+        }
         $.get('/languages', function (data) {
             $('#languageDropdown').empty();
 
@@ -501,11 +508,14 @@
             });
 
             const langValueFromUrl = getLangValueFromUrl();
-
             let matchedKey = null;
+
             if (langValueFromUrl) {
+                const cleanedLangValueFromUrl = normalize(langValueFromUrl);
+
                 $.each(data, function (key, value) {
-                    if (value.toLowerCase() === langValueFromUrl.toLowerCase()) {
+                    const normalizedDropdownValue = normalize(value);
+                    if (normalizedDropdownValue === cleanedLangValueFromUrl) {
                         matchedKey = key;
                         return false;
                     }
@@ -522,21 +532,24 @@
                 $('#languageDropdown').val('en-US').trigger('change');
             }
 
-            var $languageContainer = $('.free_lg_tts');
+            const $languageContainer = $('.free_lg_tts');
             $languageContainer.empty();
-            var counter = 0;
-            var $currentRow;
+            let counter = 0;
+            let $currentRow;
 
             $.each(data, function (key, value) {
                 if (counter % 4 === 0) {
                     $currentRow = $('<div class="row mb-2"></div>');
                     $languageContainer.append($currentRow);
                 }
-                var cleanedValue = value.replace(/[()]/g, '');
-                var $col = $(`
+
+                const cleanedUrlValue = value.replace(/[()]/g, '').trim().replace(/\s+/g, '-').toLowerCase();
+                const cleanedValue = value.replace(/[()]/g, '').trim();
+
+                const $col = $(`
                     <div class="col-12 col-sm-6 col-md-3">
                         <div class="list-group-item">
-                            <a href="/free-${encodeURIComponent(value)}-text-to-speech" data-lang="${key}">
+                            <a href="/free-${cleanedUrlValue}-text-to-speech" data-lang="${key}">
                                 Free ${cleanedValue} text to speech
                             </a>
                         </div>
@@ -547,7 +560,7 @@
             });
 
             $('.free_lg_tts a').on('click', function () {
-                var selectedLang = $(this).data('lang');
+                const selectedLang = $(this).data('lang');
                 $('#languageDropdown').val(selectedLang).trigger('change');
                 $('.tts').removeClass('d-none');
                 $('html, body').animate({
