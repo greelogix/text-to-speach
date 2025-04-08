@@ -5,15 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text-to-Speech API Documentation</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
-    <div class="pt-4 text-end pe-5">
-        <a href="{{route('register.form')}}" class="me-4">Create account</a>
-        <a href="{{route('login')}}" class="inline-block bg-blue-600 text-white py-1 px-5 rounded-lg text-md">login</a>
-    </div>
+    <nav class="navbar navbar-light bg-white shadow-sm fixed-top w-100">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="{{route('index.page')}}" class="navbar-brand fw-bold fs-4 text-dark">ttsvoiceover</a>
+            <div>
+                <a href="{{route('register.form')}}" class="me-4">Create account</a>
+                <a href="{{route('login')}}" class="inline-block bg-blue-600 text-white py-1 px-5 rounded-lg text-md">login</a>
+            </div>
+        </div>
+    </nav>
     <div class="container mx-auto p-6">
         <!-- Hero Section -->
-        <div class="text-center py-10">
+        <div class="text-center py-10 mt-5">
             <h1 class="text-4xl font-bold text-gray-800">Text-to-Speech API</h1>
             <p class="text-lg text-gray-600 mt-2">Convert text into natural-sounding speech with ease.</p>
             {{-- <a href="/login" class="mt-4 inline-block bg-blue-600 text-white py-2 px-6 rounded-lg text-lg">Get Started</a> --}}

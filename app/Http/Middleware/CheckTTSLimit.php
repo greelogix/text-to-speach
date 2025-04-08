@@ -26,7 +26,7 @@ class CheckTTSLimit
             return $next($request);
         }
         
-        $expiryDate = now()->addYears(10)->timestamp;
+        $expiryDate = now()->addDay();
 
         $ttsCount = (int) Cookie::get('tts_count', 0);
         $ttsCount++;

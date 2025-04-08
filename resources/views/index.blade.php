@@ -174,11 +174,9 @@
 <!-- navbar -->
 <nav class="navbar navbar-light bg-white shadow-sm fixed-top w-100">
     <div class="container d-flex justify-content-between align-items-center">
-        <a class="navbar-brand fw-bold fs-4 text-dark">ttsvoiceover</a>
+        <a href="{{route('index.page')}}" class="navbar-brand fw-bold fs-4 text-dark">ttsvoiceover</a>
         <div>
             <a href="{{route('api.docs')}}" class="text-decoration-none me-2 px-2 text-dark">API Keys</a>
-            <a href="#" class="text-decoration-none me-2 px-2 text-dark">Pricing</a>
-            <a href="#" class="text-decoration-none px-2 text-dark">Contact</a>
         </div>
     </div>
 </nav>
@@ -194,7 +192,7 @@
             </div>
             <div class="col-12 col-md-6">
                      {{-- locall --}}
-                    {{-- <audio controls class="w-100 mb-2">
+                    <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742904189.mp3') }}" type="audio/mpeg">
                     </audio>
                     <audio controls class="w-100 mb-2">
@@ -205,10 +203,10 @@
                     </audio>
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742904304.mp3') }}" type="audio/mpeg">
-                    </audio> --}}
+                    </audio>
                     
                        {{-- live --}}
-                    <audio controls class="w-100 mb-2">
+                    {{-- <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742970696.mp3') }}" type="audio/mpeg">
                     </audio>
                     <audio controls class="w-100 mb-2">
@@ -219,7 +217,7 @@
                     </audio>
                     <audio controls class="w-100 mb-2">
                         <source src="{{ asset('storage/tts_audio_1742970713.mp3') }}" type="audio/mpeg">
-                    </audio>
+                    </audio> --}}
             </div>
         </div>
     </div>

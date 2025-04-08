@@ -14,13 +14,18 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="bg-light">
-    <div class="container mt-4">
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-center w-100 mb-4">
+    <nav class="navbar navbar-light bg-white shadow-sm fixed-top w-100">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="{{route('index.page')}}" class="navbar-brand fw-bold fs-4 text-dark">ttsvoiceover</a>
+            <div>
+                <a href="{{ route('register.form') }}" class="btn btn-success btn-sm">Create account</a>
+                <a href="{{ route('login') }}" class="btn btn-primary btn-sm">Login</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container mt-5 pt-5">
+                <div class="d-flex flex-column flex-md-row justify-content-center align-items-center w-100 mb-4">
                     <h2 class="text-center fw-bold mb-4 mb-md-0 mx-auto mx-md-0">Text to Speech Converter</h2>
-                    <div class="d-flex gap-2">
-                        <a href="{{ route('register.form') }}" class="btn btn-success btn-sm">Sign up</a>
-                        <a href="{{ route('login') }}" class="btn btn-primary btn-sm">Login</a>
-                    </div>
                 </div>
             <div class="card p-4">
                     <div class="mb-3">
