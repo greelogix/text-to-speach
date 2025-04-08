@@ -27,10 +27,11 @@ class CheckTTSLimit
         }
         
         $expiryDate = now()->addDay();
+        $expiryMinutes = $expiryDate->diffInMinutes(now());
 
         $ttsCount = (int) Cookie::get('tts_count', 0);
         $ttsCount++;
-        Cookie::queue(Cookie::make('tts_count', $ttsCount, $expiryDate));
+        Cookie::queue(Cookie::make('tts_count', $ttsCount, $expiryMinutes));
         if ($ttsCount > 5) {
             if ($request->ajax()) { 
                 return response()->json([
