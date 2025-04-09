@@ -543,7 +543,7 @@
                     $languageContainer.append($currentRow);
                 }
 
-                const cleanedUrlValue = value.replace(/[()]/g, '').trim().replace(/\s+/g, '-').toLowerCase();
+                const cleanedUrlValue = value.replace(/[^a-zA-Z0-9 ]/g, '').trim().replace(/\s+/g, '-') .toLowerCase();
                 const cleanedValue = value.replace(/[()]/g, '').trim();
 
                 const $col = $(`
