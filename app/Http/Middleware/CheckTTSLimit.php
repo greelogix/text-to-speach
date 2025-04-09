@@ -25,12 +25,10 @@ class CheckTTSLimit
         if (!$request->isMethod('post') || !$request->filled('text')) {
             return $next($request);
         }
-        
-        $expiryDate = now()->addDay()->timestamp;
 
-        $ttsCount = (int) Cookie::get('tts_count', 0);
+        $ttsCount = (int) Cookie::get('ttsvoiceover', 0);
         $ttsCount++;
-        Cookie::queue(Cookie::make('tts_count', $ttsCount, $expiryDate));
+        Cookie::queue(Cookie::make('ttsvoiceover', $ttsCount, 60 * 24));
         if ($ttsCount > 5) {
             if ($request->ajax()) { 
                 return response()->json([
