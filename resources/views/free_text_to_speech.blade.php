@@ -228,7 +228,7 @@
 <section class="tts d-none">
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-baseline w-100">
-            <h2 class="text-center fw-bold mb-4 mx-auto">Free Text-to-Speech for {$lang}</h2>
+            <h2 class="text-center fw-bold mb-4 mx-auto">Free Text-to-Speech for {{ $lang }}</h2>
         </div>
         <div class="card card-style p-4">
                 <div class="mb-3">
